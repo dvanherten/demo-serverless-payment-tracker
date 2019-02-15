@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.WindowsAzure.Storage.Table;
+using ServerlessPaymentTracker.Functions;
 
 namespace ServerlessPaymentTracker.Models
 {
@@ -12,11 +13,11 @@ namespace ServerlessPaymentTracker.Models
 
     public static class ExpenseMappings
     {
-        public static ExpenseTableEntity ToTableEntity(this Expense expense)
+        public static ExpenseTableEntity ToTableEntity(this Expense expense, string partitionKey)
         {
             return new ExpenseTableEntity
             {
-                PartitionKey = "Expense", // Probably http context User Id after Auth
+                PartitionKey = partitionKey, 
                 RowKey = expense.Id,
                 Name = expense.Name
             };
