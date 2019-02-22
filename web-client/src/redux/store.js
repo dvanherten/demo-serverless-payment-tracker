@@ -1,4 +1,5 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { expensesReducer } from './reducers/expenses.reducer';
 import { expensesMiddleware } from './middleware/feature/expenses';
 import { apiMiddleware } from './middleware/core/api';
@@ -30,9 +31,12 @@ const coreMiddleware = [
 
 // compose the middleware with additional (optional) enhancers,
 // DevTools.instrument() will enable dev tools integration
-const enhancer = compose(
+const enhancer = composeWithDevTools(
   applyMiddleware(...featureMiddleware, ...coreMiddleware)
 );
 
-// create and configure the store
-export const store = createStore(rootReducer, {}, enhancer);
+export default function configureStore(preloadedState) {
+  const store = createStore(rootReducer, preloadedState, enhancer);
+
+  return store;
+}
