@@ -12,7 +12,7 @@ export const expensesMiddleware = () => next => action => {
         apiRequest({
           body: null,
           method: 'GET',
-          url: 'api/expenses/',
+          url: 'api/expense/',
           feature: EXPENSES
         }),
         setLoader({ state: true, feature: EXPENSES })
@@ -21,7 +21,7 @@ export const expensesMiddleware = () => next => action => {
 
     case `${EXPENSES} ${API_SUCCESS}`:
       next([
-        setExpenses({ expenses: action.payload.items, normalizeKey: 'id' }),
+        setExpenses({ expenses: action.payload, normalizeKey: null }),
         setLoader({ state: false, feature: EXPENSES })
       ]);
       break;
