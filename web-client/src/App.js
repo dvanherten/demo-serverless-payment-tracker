@@ -4,6 +4,7 @@ import './App.sass';
 import { NavBar } from './components/NavBar';
 import { ExpensePage } from './components/ExpensePage';
 import { TrackerPage } from './components/TrackerPage';
+import { registerIcons } from './icons';
 
 const routes = [
   {
@@ -13,6 +14,8 @@ const routes = [
   },
   { path: '/expenses/', component: ExpensePage }
 ];
+
+registerIcons();
 
 export const App = () => (
   <BrowserRouter>
