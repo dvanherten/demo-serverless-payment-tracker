@@ -1,4 +1,4 @@
-import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { expensesReducer } from './reducers/expenses.reducer';
 import { expensesMiddleware } from './middleware/feature/expenses';

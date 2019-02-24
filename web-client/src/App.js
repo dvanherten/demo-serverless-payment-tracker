@@ -1,13 +1,31 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
 import './App.sass';
-import { ExpenseTableView } from './components/ExpenseTableView';
+import { NavBar } from './components/NavBar';
+import { ExpensePage } from './components/ExpensePage';
+import { TrackerPage } from './components/TrackerPage';
+
+const routes = [
+  {
+    path: '/',
+    exact: true,
+    component: TrackerPage
+  },
+  { path: '/expenses/', component: ExpensePage }
+];
 
 export const App = () => (
-  <section className="section">
-    <div className="container">
-      <div className="notification">
-        <ExpenseTableView expenses={[]} />
-      </div>
-    </div>
-  </section>
+  <BrowserRouter>
+    <Fragment>
+      <NavBar />
+      {routes.map((route, index) => (
+        <Route
+          key={index}
+          path={route.path}
+          exact={route.exact}
+          component={route.component}
+        />
+      ))}
+    </Fragment>
+  </BrowserRouter>
 );

@@ -12,7 +12,7 @@ export const expensesMiddleware = () => next => action => {
         apiRequest({
           body: null,
           method: 'GET',
-          url: 'api/expense/',
+          url: '/api/expense/',
           feature: EXPENSES
         }),
         setLoader({ state: true, feature: EXPENSES })
