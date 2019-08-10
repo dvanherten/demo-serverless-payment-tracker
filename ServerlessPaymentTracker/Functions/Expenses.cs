@@ -1,5 +1,6 @@
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
@@ -28,9 +29,11 @@ namespace ServerlessPaymentTracker.Functions
             HttpRequest req,
             [Table("expenses", Connection = StorageConnectionName)]
             CloudTable expenseTable,
+            ClaimsPrincipal principal,
             ILogger log)
         {
-            log.LogInformation(JsonConvert.SerializeObject(Thread.CurrentPrincipal?.Identity, Formatting.Indented));
+            log.LogInformation(principal.Identity.IsAuthenticated.ToString());
+            log.LogInformation(principal.Identity?.Name);
             log.LogInformation("Getting expense items");
             var query = new TableQuery<ExpenseTableEntity>().Where(
                 TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, TemporaryPartitionKey)
