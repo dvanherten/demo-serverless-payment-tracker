@@ -1,5 +1,6 @@
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Http;
@@ -29,6 +30,7 @@ namespace ServerlessPaymentTracker.Functions
             CloudTable expenseTable,
             ILogger log)
         {
+            log.LogInformation(JsonConvert.SerializeObject(Thread.CurrentPrincipal?.Identity, Formatting.Indented));
             log.LogInformation("Getting expense items");
             var query = new TableQuery<ExpenseTableEntity>().Where(
                 TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, TemporaryPartitionKey)
