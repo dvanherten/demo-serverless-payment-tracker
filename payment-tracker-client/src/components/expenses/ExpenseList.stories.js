@@ -1,8 +1,9 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 
 import ExpenseList from './ExpenseList';
-import { actions } from './ExpenseItem.stories';
+import { actions as rowActions } from './ExpenseItem.stories';
 
 export const expenseItems = [
   {
@@ -26,6 +27,11 @@ export const expenseItems = [
     type: 'Monthly'
   }
 ];
+
+export const actions = {
+  ...rowActions,
+  onSave: action('onSave')
+};
 
 storiesOf('Expense List', module)
   .addDecorator(story => <div style={{ padding: '3rem' }}>{story()} </div>)

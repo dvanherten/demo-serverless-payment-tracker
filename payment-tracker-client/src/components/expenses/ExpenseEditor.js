@@ -8,39 +8,23 @@ import {
   TextField
 } from '@material-ui/core';
 
-const useForm = (callback, startingObject, requiredFields) => {
-  const [inputs, setInputs] = React.useState(startingObject || {});
-
-  const handleSubmit = event => {
-    if (event) {
-      event.preventDefault();
-    }
-    callback();
-  };
-
-  const handleInputChange = event => {
-    event.persist();
-    setInputs(inputs => ({
-      ...inputs,
-      [event.target.name]: event.target.value
-    }));
-  };
-
-  return {
-    handleSubmit,
-    handleInputChange,
-    inputs
-  };
-};
-
 const ExpenseEditor = ({ open, item, onSave, onCancel }) => {
   const isNew = item == null;
 
-  const save = () => {
-    onSave(inputs);
+  const [values, setValues] = React.useState({ id: '', name: '' });
+  React.useEffect(() => {
+    if (item) setValues(item);
+  }, [item]);
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    onSave(values);
   };
 
-  const { inputs, handleInputChange, handleSubmit } = useForm(save, item);
+  const handleInputChange = e => {
+    const { name, value } = e.target;
+    setValues({ ...values, [name]: value });
+  };
 
   return (
     <Dialog open={open} onClose={onCancel} aria-labelledby="form-dialog-title">
@@ -58,7 +42,7 @@ const ExpenseEditor = ({ open, item, onSave, onCancel }) => {
             type="text"
             fullWidth
             required
-            value={inputs.name}
+            value={values.name}
             onChange={handleInputChange}
           />
         </DialogContent>

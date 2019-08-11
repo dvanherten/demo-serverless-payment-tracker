@@ -1,7 +1,14 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Table, TableHead, TableCell } from '@material-ui/core';
+import {
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody
+} from '@material-ui/core';
 import ExpenseItem from './ExpenseItem';
+import ExpenseEditor from './ExpenseEditor';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -14,18 +21,52 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ExpenseList = ({ items, onRowClick }) => {
+const ExpenseList = ({ items, onSave }) => {
   const classes = useStyles();
+  const [isDialogOpen, setDialog] = React.useState(false);
+  const [openedExpense, openExpense] = React.useState(null);
+
+  const onRowClick = (e, id) => {
+    const expense = items.find(x => x.id === id);
+    openExpense(expense);
+    setDialog(true);
+  };
+
+  const saveWithClose = expense => {
+    onSave(expense);
+    closeModal();
+  };
+
+  const closeModal = () => {
+    setDialog(false);
+    openExpense(null);
+  };
 
   return (
-    <Table className={classes.table}>
-      <TableHead>
-        <TableCell>Name</TableCell>
-      </TableHead>
-      {items.map(expense => (
-        <ExpenseItem key={expense.id} {...expense} onRowClick={onRowClick} />
-      ))}
-    </Table>
+    <div>
+      <Table className={classes.table}>
+        <TableHead>
+          <TableRow>
+            <TableCell>Name</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {items.map(expense => (
+            <ExpenseItem
+              key={expense.id}
+              {...expense}
+              onRowClick={onRowClick}
+            />
+          ))}
+        </TableBody>
+      </Table>
+      <ExpenseEditor
+        open={isDialogOpen}
+        item={openedExpense}
+        onSave={saveWithClose}
+        onCancel={closeModal}
+      />
+    </div>
   );
 };
 
