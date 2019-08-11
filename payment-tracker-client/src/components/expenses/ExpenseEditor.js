@@ -52,13 +52,13 @@ const ExpenseEditor = ({ open, item, onSave, onCancel }) => {
           <TextField
             autoFocus={isNew}
             margin="dense"
-            id="title"
-            name="title"
-            label="Title"
+            id="name"
+            name="name"
+            label="Name"
             type="text"
             fullWidth
             required
-            value={inputs.title}
+            value={inputs.name}
             onChange={handleInputChange}
           />
         </DialogContent>

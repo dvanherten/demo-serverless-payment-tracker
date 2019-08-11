@@ -7,22 +7,22 @@ import { actions } from './ExpenseItem.stories';
 export const expenseItems = [
   {
     id: '1',
-    title: 'Sample Expense Item 1',
+    name: 'Sample Expense Item 1',
     type: 'Monthly'
   },
   {
     id: '2',
-    title: 'Sample Expense Item 2',
+    name: 'Sample Expense Item 2',
     type: 'Monthly'
   },
   {
     id: '3',
-    title: 'Sample Expense Item 3',
+    name: 'Sample Expense Item 3',
     type: 'Monthly'
   },
   {
     id: '4',
-    title: 'Sample Expense Item 4',
+    name: 'Sample Expense Item 4',
     type: 'Monthly'
   }
 ];

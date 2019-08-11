@@ -20,7 +20,7 @@ const ExpenseList = ({ items, onRowClick }) => {
   return (
     <Table className={classes.table}>
       <TableHead>
-        <TableCell>Expense Name</TableCell>
+        <TableCell>Name</TableCell>
       </TableHead>
       {items.map(expense => (
         <ExpenseItem key={expense.id} {...expense} onRowClick={onRowClick} />
