@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 
 import { Table } from '@material-ui/core';
 
-import ExpenseItem from './ExpenseItem';
+import ExpenseEditor from './ExpenseEditor';
 
 export const expenseItem = {
   id: '1',
@@ -12,13 +12,17 @@ export const expenseItem = {
 };
 
 export const actions = {
-  onRowClick: action('onRowClick')
+  onSave: action('onSave'),
+  onCancel: action('onCancel')
 };
 
-storiesOf('Expense Row', module)
+storiesOf('Expense Editor', module)
   .addDecorator(story => (
     <div style={{ padding: '3rem' }}>
       <Table>{story()}</Table>
     </div>
   ))
-  .add('default', () => <ExpenseItem {...expenseItem} {...actions} />);
+  .add('add new', () => <ExpenseEditor open={true} {...actions} />)
+  .add('edit existing', () => (
+    <ExpenseEditor open={true} item={expenseItem} {...actions} />
+  ));
