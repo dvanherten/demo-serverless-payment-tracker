@@ -27,7 +27,12 @@ const ExpenseEditor = ({ open, item, onSave, onCancel }) => {
   };
 
   return (
-    <Dialog open={open} onClose={onCancel} aria-labelledby="form-dialog-title">
+    <Dialog
+      open={open}
+      onClose={onCancel}
+      aria-labelledby="form-dialog-title"
+      fullWidth
+    >
       <form onSubmit={handleSubmit}>
         <DialogTitle id="form-dialog-title">
           {isNew ? 'Add' : 'Edit'} Expense
@@ -47,10 +52,10 @@ const ExpenseEditor = ({ open, item, onSave, onCancel }) => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={onCancel} color="secondary">
+          <Button onClick={onCancel} color="secondary" variant="contained">
             Cancel
           </Button>
-          <Button color="primary" type="submit">
+          <Button color="primary" type="submit" variant="contained">
             Save
           </Button>
         </DialogActions>

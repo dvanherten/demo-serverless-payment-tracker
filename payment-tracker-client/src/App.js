@@ -1,12 +1,12 @@
 import React from 'react';
-import ExpenseService from './services/ExpenseService';
 import NavBar from './components/layout/NavBar';
-import ExpenseItems from './components/expenses/ExpenseList';
 
 function App() {
+  const [activeTab, setTab] = React.useState(1);
+
   return (
     <div>
-      <NavBar />
+      <NavBar activeTab={activeTab} setTab={setTab} />
     </div>
   );
 }

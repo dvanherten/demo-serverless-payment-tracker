@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { Table } from '@material-ui/core';
+import { Table, TableBody } from '@material-ui/core';
 
 import ExpenseItem from './ExpenseItem';
 
@@ -18,7 +18,9 @@ export const actions = {
 storiesOf('Expense Row', module)
   .addDecorator(story => (
     <div style={{ padding: '3rem' }}>
-      <Table>{story()}</Table>
+      <Table>
+        <TableBody>{story()}</TableBody>
+      </Table>
     </div>
   ))
   .add('default', () => <ExpenseItem {...expenseItem} {...actions} />);
