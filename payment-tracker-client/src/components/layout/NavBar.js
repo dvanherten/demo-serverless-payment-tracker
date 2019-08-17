@@ -1,13 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {
-  AppBar,
-  Avatar,
-  Tabs,
-  Tab,
-  Toolbar,
-  Typography
-} from '@material-ui/core';
+import { AppBar, Tabs, Tab, Toolbar, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const NavBar = ({ activeTab, setTab }) => {
+const NavBar = ({ activeTab, setTab, avatar }) => {
   const classes = useStyles();
   function handleChange(e, newValue) {
     setTab(newValue);
@@ -30,7 +23,7 @@ const NavBar = ({ activeTab, setTab }) => {
 
   return (
     <div className={classes.root}>
-      <AppBar>
+      <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" color="inherit">
             Payment Tracker
@@ -43,7 +36,7 @@ const NavBar = ({ activeTab, setTab }) => {
             <Tab label="Monthly View" />
             <Tab label="Expenses" />
           </Tabs>
-          <Avatar className={classes.avatar}>DV</Avatar>
+          {avatar}
         </Toolbar>
       </AppBar>
     </div>
