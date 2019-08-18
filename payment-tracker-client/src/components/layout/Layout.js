@@ -1,14 +1,24 @@
 import React from 'react';
+import { Container } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import NavBar from './NavBar';
 import ProfileButton from './ProfileButton';
 
+const useStyles = makeStyles(theme => ({
+  headerSpace: {
+    paddingTop: theme.spacing(2)
+  }
+}));
+
 const TabPanel = ({ children, value, index }) => {
+  const classes = useStyles();
+
   if (value !== index) {
     console.log(`Value: ${value} - Index: ${index}`);
     return <React.Fragment />;
   }
   console.log(`Showing index ${index}`);
-  return children;
+  return <Container className={classes.headerSpace}>{children}</Container>;
 };
 
 const Layout = ({ monthlyViewPage, expensesPage, initials }) => {

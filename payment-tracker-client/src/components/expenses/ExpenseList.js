@@ -5,6 +5,7 @@ import {
   TableHead,
   TableRow,
   TableCell,
+  TableFooter,
   TableBody
 } from '@material-ui/core';
 import ExpenseItem from './ExpenseItem';
@@ -59,6 +60,11 @@ const ExpenseList = ({ items, onSave }) => {
             />
           ))}
         </TableBody>
+        <TableFooter>
+          <TableRow hover onClick={onRowClick}>
+            <TableCell>Add New Expense...</TableCell>
+          </TableRow>
+        </TableFooter>
       </Table>
       <ExpenseEditor
         open={isDialogOpen}

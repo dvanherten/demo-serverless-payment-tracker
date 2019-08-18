@@ -10,11 +10,13 @@ import {
 
 const ExpenseEditor = ({ open, item, onSave, onCancel }) => {
   const isNew = item == null;
+  const emptyItem = { id: '', name: '' };
+  const [values, setValues] = React.useState(emptyItem);
 
-  const [values, setValues] = React.useState({ id: '', name: '' });
   React.useEffect(() => {
     if (item) setValues(item);
-  }, [item]);
+    else setValues(emptyItem);
+  }, [item, emptyItem]);
 
   const handleSubmit = e => {
     e.preventDefault();
