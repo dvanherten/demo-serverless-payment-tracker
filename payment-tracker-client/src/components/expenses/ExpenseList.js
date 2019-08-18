@@ -8,7 +8,7 @@ import {
   TableFooter,
   TableBody
 } from '@material-ui/core';
-import ExpenseItem from './ExpenseItem';
+import ExpenseItem, { LoadingExpenseItem } from './ExpenseItem';
 import ExpenseEditor from './ExpenseEditor';
 
 const useStyles = makeStyles(theme => ({
@@ -22,7 +22,26 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ExpenseList = ({ items, onSave }) => {
+const LoadingExpenseBody = () => (
+  <TableBody>
+    <LoadingExpenseItem />
+    <LoadingExpenseItem />
+    <LoadingExpenseItem />
+    <LoadingExpenseItem />
+  </TableBody>
+);
+
+const ExpenseListBody = ({ items, onRowClick }) => {
+  return (
+    <TableBody>
+      {items.map(expense => (
+        <ExpenseItem key={expense.id} {...expense} onRowClick={onRowClick} />
+      ))}
+    </TableBody>
+  );
+};
+
+const ExpenseList = ({ isLoading, items, onSave }) => {
   const classes = useStyles();
   const [isDialogOpen, setDialog] = React.useState(false);
   const [openedExpense, openExpense] = React.useState(null);
@@ -43,6 +62,12 @@ const ExpenseList = ({ items, onSave }) => {
     openExpense(null);
   };
 
+  const body = isLoading ? (
+    <LoadingExpenseBody />
+  ) : (
+    <ExpenseListBody items={items} onRowClick={onRowClick} />
+  );
+
   return (
     <div>
       <Table className={classes.table}>
@@ -51,20 +76,16 @@ const ExpenseList = ({ items, onSave }) => {
             <TableCell>Name</TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
-          {items.map(expense => (
-            <ExpenseItem
-              key={expense.id}
-              {...expense}
-              onRowClick={onRowClick}
-            />
-          ))}
-        </TableBody>
-        <TableFooter>
-          <TableRow hover onClick={onRowClick}>
-            <TableCell>Add New Expense...</TableCell>
-          </TableRow>
-        </TableFooter>
+        {body}
+        {isLoading ? (
+          <React.Fragment />
+        ) : (
+          <TableFooter>
+            <TableRow hover onClick={onRowClick}>
+              <TableCell>Add New Expense...</TableCell>
+            </TableRow>
+          </TableFooter>
+        )}
       </Table>
       <ExpenseEditor
         open={isDialogOpen}

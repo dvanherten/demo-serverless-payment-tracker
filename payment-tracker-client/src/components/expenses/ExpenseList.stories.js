@@ -35,4 +35,5 @@ export const actions = {
 
 storiesOf('Expense List', module)
   .addDecorator(story => <div style={{ padding: '3rem' }}>{story()} </div>)
-  .add('default', () => <ExpenseList items={expenseItems} {...actions} />);
+  .add('default', () => <ExpenseList items={expenseItems} {...actions} />)
+  .add('loading', () => <ExpenseList isLoading items={[]} {...actions} />);

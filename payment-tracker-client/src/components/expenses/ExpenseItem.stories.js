@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 
 import { Table, TableBody } from '@material-ui/core';
 
-import ExpenseItem from './ExpenseItem';
+import ExpenseItem, { LoadingExpenseItem } from './ExpenseItem';
 
 export const expenseItem = {
   id: '1',
@@ -23,4 +23,5 @@ storiesOf('Expense Row', module)
       </Table>
     </div>
   ))
-  .add('default', () => <ExpenseItem {...expenseItem} {...actions} />);
+  .add('default', () => <ExpenseItem {...expenseItem} {...actions} />)
+  .add('loading', () => <LoadingExpenseItem />);

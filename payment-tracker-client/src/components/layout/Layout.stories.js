@@ -10,16 +10,30 @@ export const actions = {
   onSave: action('onSave')
 };
 
-storiesOf('Layout', module).add('withFakePages', () => (
-  <Layout
-    monthlyViewPage={
-      <MonthlyViewPage onSave={actions.onSave}>Expenses Page</MonthlyViewPage>
-    }
-    expensesPage={
-      <ExpensesPage expenses={expenseItems} onSave={actions.onSave}>
-        Expenses Page
-      </ExpensesPage>
-    }
-    initials="DV"
-  />
-));
+storiesOf('Layout', module)
+  .add('with data', () => (
+    <Layout
+      monthlyViewPage={
+        <MonthlyViewPage onSave={actions.onSave}>Expenses Page</MonthlyViewPage>
+      }
+      expensesPage={
+        <ExpensesPage expenses={expenseItems} onSave={actions.onSave}>
+          Expenses Page
+        </ExpensesPage>
+      }
+      initials="DV"
+    />
+  ))
+  .add('loading', () => (
+    <Layout
+      monthlyViewPage={
+        <MonthlyViewPage onSave={actions.onSave}>Expenses Page</MonthlyViewPage>
+      }
+      expensesPage={
+        <ExpensesPage isLoading expenses={[]} onSave={actions.onSave}>
+          Expenses Page
+        </ExpensesPage>
+      }
+      initials="DV"
+    />
+  ));
