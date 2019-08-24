@@ -11,6 +11,19 @@ export const actions = {
 };
 
 storiesOf('Layout', module)
+  .add('first visit', () => (
+    <Layout
+      monthlyViewPage={
+        <MonthlyViewPage onSave={actions.onSave}>Expenses Page</MonthlyViewPage>
+      }
+      expensesPage={
+        <ExpensesPage expenses={[]} onSave={actions.onSave}>
+          Expenses Page
+        </ExpensesPage>
+      }
+      initials="DV"
+    />
+  ))
   .add('with data', () => (
     <Layout
       monthlyViewPage={

@@ -6,7 +6,7 @@ const ExpensesPage = ({ isLoading, expenses, onSave }) => {
   return (
     <React.Fragment>
       <PageHeader headerText="Expenses" />
-      <ExpenseList isLoading items={expenses} onSave={onSave} />
+      <ExpenseList isLoading={isLoading} items={expenses} onSave={onSave} />
     </React.Fragment>
   );
 };
