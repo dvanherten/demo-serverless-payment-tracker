@@ -1,11 +1,22 @@
 import React from 'react';
 
 import PageHeader from './PageHeader';
+import MonthlyViewItem from './monthly-view/MonthlyViewItem';
+import { Grid } from '@material-ui/core';
 
 const MonthlyViewPage = ({ monthlyViewItems, onSave }) => {
   return (
     <React.Fragment>
-      <PageHeader headerText="Monthly View" />
+      <Grid container spacing={1}>
+        <Grid item xs={12}>
+          <PageHeader headerText="August 2019" />
+        </Grid>
+        {monthlyViewItems.map(x => (
+          <Grid item xs>
+            <MonthlyViewItem key={x.id} {...x} changePaidStatus={onSave} />
+          </Grid>
+        ))}
+      </Grid>
     </React.Fragment>
   );
 };

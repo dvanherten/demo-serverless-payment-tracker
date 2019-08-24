@@ -5,6 +5,11 @@ import Layout from './Layout';
 import { expenseItems } from '../expenses/ExpenseList.stories';
 import ExpensesPage from '../ExpensesPage';
 import MonthlyViewPage from '../MonthlyViewPage';
+import {
+  paidItem,
+  notPaidItem,
+  naItem
+} from '../monthly-view/MonthlyViewItem.stories';
 
 export const actions = {
   onSave: action('onSave')
@@ -14,25 +19,22 @@ storiesOf('Layout', module)
   .add('first visit', () => (
     <Layout
       monthlyViewPage={
-        <MonthlyViewPage onSave={actions.onSave}>Expenses Page</MonthlyViewPage>
+        <MonthlyViewPage monthlyViewItems={[]} onSave={actions.onSave} />
       }
-      expensesPage={
-        <ExpensesPage expenses={[]} onSave={actions.onSave}>
-          Expenses Page
-        </ExpensesPage>
-      }
+      expensesPage={<ExpensesPage expenses={[]} onSave={actions.onSave} />}
       initials="DV"
     />
   ))
   .add('with data', () => (
     <Layout
       monthlyViewPage={
-        <MonthlyViewPage onSave={actions.onSave}>Expenses Page</MonthlyViewPage>
+        <MonthlyViewPage
+          monthlyViewItems={[paidItem, notPaidItem, naItem]}
+          onSave={actions.onSave}
+        />
       }
       expensesPage={
-        <ExpensesPage expenses={expenseItems} onSave={actions.onSave}>
-          Expenses Page
-        </ExpensesPage>
+        <ExpensesPage expenses={expenseItems} onSave={actions.onSave} />
       }
       initials="DV"
     />
@@ -40,12 +42,10 @@ storiesOf('Layout', module)
   .add('loading', () => (
     <Layout
       monthlyViewPage={
-        <MonthlyViewPage onSave={actions.onSave}>Expenses Page</MonthlyViewPage>
+        <MonthlyViewPage monthlyViewItems={[]} onSave={actions.onSave} />
       }
       expensesPage={
-        <ExpensesPage isLoading expenses={[]} onSave={actions.onSave}>
-          Expenses Page
-        </ExpensesPage>
+        <ExpensesPage isLoading expenses={[]} onSave={actions.onSave} />
       }
       initials="DV"
     />

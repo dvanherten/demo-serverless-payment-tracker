@@ -16,7 +16,7 @@ export const notPaidItem = {
   status: 'Not Paid'
 };
 
-export const naitem = {
+export const naItem = {
   id: '3',
   name: 'Car Payment',
   status: 'N/A'
@@ -30,4 +30,4 @@ storiesOf('Monthly View Item', module)
   .addDecorator(story => <div style={{ padding: '3rem' }}>{story()} </div>)
   .add('Paid', () => <MonthlyViewItem {...paidItem} {...actions} />)
   .add('UnPaid', () => <MonthlyViewItem {...notPaidItem} {...actions} />)
-  .add('N/A', () => <MonthlyViewItem {...naitem} {...actions} />);
+  .add('N/A', () => <MonthlyViewItem {...naItem} {...actions} />);
