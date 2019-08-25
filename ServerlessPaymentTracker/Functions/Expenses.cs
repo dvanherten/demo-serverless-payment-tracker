@@ -1,5 +1,6 @@
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,15 +27,13 @@ namespace ServerlessPaymentTracker.Functions
         [FunctionName("GetExpenses")]
         public static async Task<IActionResult> GetExpenses(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = BaseRoute)]
-            HttpRequest req,
+            HttpRequestMessage req,
             [Table("expenses", Connection = StorageConnectionName)]
             CloudTable expenseTable,
-            ClaimsPrincipal principal,
             ILogger log)
         {
-            log.LogInformation(principal.Identity.IsAuthenticated.ToString());
-            log.LogInformation(principal.Identity?.Name);
-            log.LogInformation("Getting expense items");
+            var claimsPrincipal = await JwtAuthentication.ValidateTokenAsync(req.Headers.Authorization);
+
             var query = new TableQuery<ExpenseTableEntity>().Where(
                 TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, TemporaryPartitionKey)
             );
