@@ -1,17 +1,22 @@
 import React from 'react';
 
-import PageHeader from './PageHeader';
+import MonthPicker from './monthly-view/MonthPicker';
 import MonthlyViewItem, {
   MonthlyViewItemLoading
 } from './monthly-view/MonthlyViewItem';
 import { Grid } from '@material-ui/core';
 
-const MonthlyViewPage = ({ isLoading, monthlyViewItems, onSave }) => {
+const MonthlyViewPage = ({
+  isLoading,
+  monthlyViewItems,
+  onSave,
+  onDateChanged
+}) => {
   return (
     <React.Fragment>
       <Grid container spacing={1}>
         <Grid item xs={12}>
-          <PageHeader headerText="August 2019" />
+          <MonthPicker onDateChanged={onDateChanged} />
         </Grid>
         {isLoading && (
           <React.Fragment>
