@@ -23,9 +23,9 @@ const requestObj = {
 
 const myMSALObj = new UserAgentApplication(msalConfig);
 
-function signOut() {
-  myMSALObj.logout();
-}
+// function signOut() {
+//   myMSALObj.logout();
+// }
 
 function acquireTokenPopupAndCallMSGraph(callback) {
   //Always start with acquireTokenSilent to obtain a token in the signed in user from cache
@@ -62,7 +62,7 @@ function acquireTokenPopupAndCallMSGraph(callback) {
 function callMSGraph(theUrl, accessToken, callback) {
   var xmlHttp = new XMLHttpRequest();
   xmlHttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200)
+    if (this.readyState === 4 && this.status === 200)
       callback(JSON.parse(this.responseText));
   };
   xmlHttp.open('GET', theUrl, true); // true for asynchronous
