@@ -42,7 +42,11 @@ storiesOf('Layout', module)
   .add('loading', () => (
     <Layout
       monthlyViewPage={
-        <MonthlyViewPage monthlyViewItems={[]} onSave={actions.onSave} />
+        <MonthlyViewPage
+          isLoading
+          monthlyViewItems={[]}
+          onSave={actions.onSave}
+        />
       }
       expensesPage={
         <ExpensesPage isLoading expenses={[]} onSave={actions.onSave} />

@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import MonthlyViewItem from './MonthlyViewItem';
+import MonthlyViewItem, { MonthlyViewItemLoading } from './MonthlyViewItem';
 
 export const paidItem = {
   id: '1',
@@ -30,4 +30,5 @@ storiesOf('Monthly View Item', module)
   .addDecorator(story => <div style={{ padding: '3rem' }}>{story()} </div>)
   .add('Paid', () => <MonthlyViewItem {...paidItem} {...actions} />)
   .add('UnPaid', () => <MonthlyViewItem {...notPaidItem} {...actions} />)
-  .add('N/A', () => <MonthlyViewItem {...naItem} {...actions} />);
+  .add('N/A', () => <MonthlyViewItem {...naItem} {...actions} />)
+  .add('loading', () => <MonthlyViewItemLoading />);

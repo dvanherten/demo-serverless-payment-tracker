@@ -9,12 +9,29 @@ import {
   Typography
 } from '@material-ui/core';
 import PayButton from './PayButton';
+import Skeleton from '@material-ui/lab/Skeleton';
 
 const useStyles = makeStyles({
   card: {
     width: 290
   }
 });
+
+export const MonthlyViewItemLoading = () => {
+  const classes = useStyles();
+  return (
+    <Card className={classes.card}>
+      <CardContent>
+        <Skeleton width="60%" height={10} />
+        <Skeleton width="60%" height={6} />
+      </CardContent>
+      <CardActions>
+        <Skeleton variant="rect" height={38} width={137.5} />
+        <Skeleton variant="rect" height={38} width={137.5} />
+      </CardActions>
+    </Card>
+  );
+};
 
 const MonthlyViewButtons = ({ id, status, changePaidStatus }) => (
   <ButtonGroup fullWidth aria-label="full width outlined button group">
@@ -45,16 +62,14 @@ const MonthlyViewItem = ({ id, name, status, changePaidStatus }) => {
         <Typography variant="h5" component="h2">
           {name}
         </Typography>
-        <Typography className={classes.pos} color="textSecondary">
-          Currently {status}
-        </Typography>
+        <Typography color="textSecondary">Currently {status}</Typography>
       </CardContent>
       <CardActions>
         <MonthlyViewButtons
           id={id}
           status={status}
           changePaidStatus={changePaidStatus}
-        ></MonthlyViewButtons>
+        />
       </CardActions>
     </Card>
   );
